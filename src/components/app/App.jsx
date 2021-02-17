@@ -6,22 +6,43 @@ const initialState = {
   after: []
 };
 
+function reducer(state, action) {
+  switch(action.type) {
+    case 'COLOR_CHANGE': {
+      const before = [...state.before, state.color];
+      return { color: action.payload, before };
+    }
+    case 'COLOR_UNDO':
+      return;
+    case 'COLOR_REDO':
+      return;
+    default:
+      return state;
+  }
+};
+
 function App() {
-  const { current, undo, redo, record } = useRecord('#b2ff66');
+
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const record = ({ target }) => {
+    dispatch({
+      type: target.id,
+      payload: target.value
+    });
+  };
 
   return (
     <>
-      <button data-testid="undo" onClick={undo}>undo</button>
-      <button data-testid="redo" onClick={redo}>redo</button>
-      <label htmlFor="color-picker">color-picker</label>
+      <label htmlFor="COLOR_CHANGE">color-picker</label>
       <input
-        id="color-picker"
+        id="COLOR_CHANGE"
         type="color"
-        value={current}
-        onChange={({ target }) => record(target.value)}/>
+        value={state.color}
+        onChange={ record } />
       <div
         data-testid="color-box"
-        style={{ backgroundColor: current, width: '10rem', height: '10rem' }}
+        style={{ backgroundColor: state.color, width: '10rem', height: '10rem' }}
       ></div>
     </>
   );

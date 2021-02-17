@@ -44,7 +44,7 @@ describe('App component', () => {
     });
   });
 
-  it('redo setting the color back to green', async() => {
+  it('redo setting the color to green', async() => {
     render(<App/>);
 
     const colorPicker = await screen.findByLabelText('color-picker');
