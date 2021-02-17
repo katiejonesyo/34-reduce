@@ -32,19 +32,20 @@ import React, { useState } from 'react';
 };
 
 function App() {
-  const { current, undo, redo, record } = useRecord('#FF0000');
+  const { current, undo, redo, record } = useRecord('#b2ff66');
 
   return (
     <>
-      <button onClick={undo}>undo</button>
-      <button onClick={redo}>redo</button>
-      <label htmlFor="color-picker">color: </label>
+      <button data-testid="undo" onClick={undo}>undo</button>
+      <button data-testid="redo" onClick={redo}>redo</button>
+      <label htmlFor="color-picker">color-picker</label>
       <input
         id="color-picker"
         type="color"
         value={current}
         onChange={({ target }) => record(target.value)}/>
       <div
+        data-testid="color-box"
         style={{ backgroundColor: current, width: '10rem', height: '10rem' }}
       ></div>
     </>
