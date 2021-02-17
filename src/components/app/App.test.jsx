@@ -43,27 +43,27 @@ describe('App component', () => {
     });
   });
 
-  // it('redo setting the color to green', async() => {
-  //   render(<App/>);
+  it('redo setting the color to green', async() => {
+    render(<App/>);
 
-  //   const colorPicker = await screen.findByLabelText('color-picker');
-  //   const colorBox = await screen.findByTestId('color-box');
-  //   const undo = await screen.findByText('undo');
-  //   const redo = await screen.findByText('redo');
+    const colorPicker = await screen.findByLabelText('color-picker');
+    const colorBox = await screen.findByTestId('color-box');
+    const undo = await screen.findByText('undo');
+    const redo = await screen.findByText('redo');
 
-  //   fireEvent.change(colorPicker, {
-  //     target: {
-  //       value: '#b2ff66'
-  //     }
-  //   });
+    fireEvent.change(colorPicker, {
+      target: {
+        value: '#b2ff66'
+      }
+    });
 
-  //   fireEvent.click(undo);
-  //   fireEvent.click(redo);
+    fireEvent.click(undo);
+    fireEvent.click(redo);
 
-  //   return waitFor(() => {
-  //     expect(colorBox.style.backgroundColor).toBe('rgb(178, 255, 102)');
-  //   });
-  // });
+    return waitFor(() => {
+      expect(colorBox.style.backgroundColor).toBe('rgb(178, 255, 102)');
+    });
+  });
 });
 
 

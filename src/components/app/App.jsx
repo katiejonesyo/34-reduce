@@ -6,7 +6,7 @@ const initialState = {
   after: []
 };
 
-function reducer(state, action) {
+const reducer = (state, action) => {
   switch(action.type) {
     case 'COLOR_CHANGE': {
       const before = [...state.before, state.color];
@@ -18,9 +18,9 @@ function reducer(state, action) {
       return { color: state.before.slice(-1)[0], before, after };
   }
     case 'COLOR_REDO':
-      return;	 
-      default:	    
-      return state;	     
+      const before = [...state.before, state.color];
+      const after = state.after.slice(1);
+      return { color: state.after[0], before, after };   
   }	
 };
 
@@ -40,11 +40,17 @@ function App() {
     });
   };
 
+  const redo = ({ target }) => {
+    dispatch({
+      type: target.id
+    });
+  };
 
 
   return (
     <>
       <button data-testid="undo" onClick={undo} id="COLOR_UNDO">undo</button>
+      <button data-testid="redo" onClick={undo} id="COLOR_REDO">redo</button>
       <label htmlFor="COLOR_CHANGE">color-picker</label>
       <input
         id="COLOR_CHANGE"
